@@ -11,7 +11,8 @@ class Cl:
 
 def load_data():
     date_1, date_2 = "tpep_pickup_datetime", "tpep_dropoff_datetime"
-    engine = create_engine(path_to_postgres)
+    path = f"postgresql://{username}:{password}@{hostname}:{port}/{name_database}" 
+    engine = create_engine(path)
 
     if name_tb not in inspect(engine).get_table_names():
         D_frame = read_csv(f"{folder_data}\\{data}")

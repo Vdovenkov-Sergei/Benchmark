@@ -1,21 +1,25 @@
+# Кол-во попыток запуска на статистических данных
 ATTEMPTS = 20
 
-name_db = "DB_big_taxi.db"
-name_tb = "B_trips"
-data = "nyc_yellow_big.csv"
-folder_data = "Data"
-path_to_postgres = "postgresql://postgres:12345@localhost:5432/postgres"
+# Название базы данных (файла .db)
+name_db = ""
+# Название таблицы в базе данных
+name_tb = ""
+# Название файла с данными
+data = ""
+# Название папки, где будут храниться файлы .csv, .db
+folder_data = ""
 
-SQLITE3 = True
-PANDAS = True
-PSYCOPG2 = True
-DUCKDB = True
-SQLALCHEMY = True
+# Данные для подключения к PostrgeSQL
+username = ""
+password = ""
+hostname = "localhost"
+port = "5432"
+name_database = ""
 
-db_params = {
-    "dbname": "postgres",
-    "user": "postgres",
-    "password": "12345",
-    "host": "localhost",
-    "port": "5432",
-}
+# Выполняемые модули в программе (True - надо выполнить, False - не надо выполнить)
+SQLITE3 = False
+PANDAS = False
+PSYCOPG2 = False
+DUCKDB = False
+SQLALCHEMY = False

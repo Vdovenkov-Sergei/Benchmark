@@ -13,6 +13,8 @@ queries = [
        FROM "{name_tb}" GROUP BY 1, 2, 3 ORDER BY 2, 4 DESC;""",
 ]
 COUNT_QUERY = 4
+db_params = {"dbname": name_database, "user": username, "password": password,
+             "host": hostname, "port": port}
 
 def test():
     results = [0] * COUNT_QUERY

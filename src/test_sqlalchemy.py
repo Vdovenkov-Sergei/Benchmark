@@ -13,10 +13,11 @@ queries = [
        FROM "{name_tb}" GROUP BY 1, 2, 3 ORDER BY 2, 4 DESC;""",
 ]
 COUNT_QUERY = 4
+path = f"postgresql://{username}:{password}@{hostname}:{port}/{name_database}" 
 
 def test():
     results = [0] * COUNT_QUERY
-    engine = create_engine(path_to_postgres)
+    engine = create_engine(path)
     connection = engine.connect()
     for i in range(COUNT_QUERY):
         for _ in range(ATTEMPTS):

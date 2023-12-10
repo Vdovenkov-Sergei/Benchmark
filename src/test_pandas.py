@@ -1,7 +1,7 @@
 from time import perf_counter
 from config import *
 from sqlalchemy import create_engine
-import pandas
+import pandas as pd
 
 queries = [
     f"""SELECT "VendorID", COUNT(*)
@@ -14,14 +14,15 @@ queries = [
        FROM "{name_tb}" GROUP BY 1, 2, 3 ORDER BY 2, 4 DESC;""",
 ]
 COUNT_QUERY = 4
+path = f"postgresql://{username}:{password}@{hostname}:{port}/{name_database}" 
 
 def test():
     results = [0] * COUNT_QUERY
-    engine = create_engine(path_to_postgres)
+    engine = create_engine(path)
     for i in range(COUNT_QUERY):
         for _ in range(ATTEMPTS):
             start = perf_counter()
-            pandas.read_sql(queries[i], con=engine)
+            pd.read_sql(queries[i], con=engine)
             finish = perf_counter()
             results[i] += finish - start
         results[i] = round(results[i] / ATTEMPTS, 3)

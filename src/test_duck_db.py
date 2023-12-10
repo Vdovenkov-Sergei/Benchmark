@@ -16,13 +16,15 @@ COUNT_QUERY = 4
 
 def test():
     results = [0] * COUNT_QUERY
-    db = duckdb.connect(f"{folder_data}\\{name_db}")
+    connection = duckdb.connect(f"{folder_data}\\{name_db}")
+    cursor = connection.cursor()
     for i in range(COUNT_QUERY):
         for _ in range(ATTEMPTS):
             start = perf_counter()
-            db.execute(queries[i])
+            cursor.execute(queries[i])
             finish = perf_counter()
             results[i] += finish - start
         results[i] = round(results[i] / ATTEMPTS, 3)
-    db.close()
+    cursor.close()
+    connection.close()
     return results
