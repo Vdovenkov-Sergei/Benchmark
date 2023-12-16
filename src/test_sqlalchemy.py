@@ -1,5 +1,6 @@
 from time import perf_counter
 from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
 from config import *
 
 queries = [
@@ -13,19 +14,20 @@ queries = [
        FROM "{name_tb}" GROUP BY 1, 2, 3 ORDER BY 2, 4 DESC;""",
 ]
 COUNT_QUERY = 4
-path = f"postgresql://{username}:{password}@{hostname}:{port}/{name_database}" 
+path = f"postgresql://{username}:{password}@{hostname}:{port}/{name_database}"
 
 def test():
-    results = [0] * COUNT_QUERY
+    measured_time = [0] * COUNT_QUERY
     engine = create_engine(path)
-    connection = engine.connect()
+    session = sessionmaker(bind=engine)()
     for i in range(COUNT_QUERY):
         for _ in range(ATTEMPTS):
             start = perf_counter()
-            connection.execute(text(queries[i]))
+            session.execute(text(queries[i]))
             finish = perf_counter()
-            results[i] += finish - start
-        results[i] = round(results[i] / ATTEMPTS, 3)
-    connection.close()
+            measured_time[i] += finish - start
+        measured_time[i] = round(measured_time[i] / ATTEMPTS, 4)
+    session.close()
     engine.dispose()
-    return results
+    return measured_time
+    

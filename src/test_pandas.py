@@ -17,14 +17,14 @@ COUNT_QUERY = 4
 path = f"postgresql://{username}:{password}@{hostname}:{port}/{name_database}" 
 
 def test():
-    results = [0] * COUNT_QUERY
+    measured_time = [0] * COUNT_QUERY
     engine = create_engine(path)
     for i in range(COUNT_QUERY):
         for _ in range(ATTEMPTS):
             start = perf_counter()
             pd.read_sql(queries[i], con=engine)
             finish = perf_counter()
-            results[i] += finish - start
-        results[i] = round(results[i] / ATTEMPTS, 3)
+            measured_time[i] += finish - start
+        measured_time[i] = round(measured_time[i] / ATTEMPTS, 4)
     engine.dispose()
-    return results
+    return measured_time

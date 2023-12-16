@@ -17,7 +17,7 @@ db_params = {"dbname": name_database, "user": username, "password": password,
              "host": hostname, "port": port}
 
 def test():
-    results = [0] * COUNT_QUERY
+    measured_time = [0] * COUNT_QUERY
     connection = psycopg2.connect(**db_params)
     cursor = connection.cursor()
     for i in range(COUNT_QUERY):
@@ -25,8 +25,8 @@ def test():
             start = perf_counter()
             cursor.execute(queries[i])
             finish = perf_counter()
-            results[i] += finish - start
-        results[i] = round(results[i] / ATTEMPTS, 3)
+            measured_time[i] += finish - start
+        measured_time[i] = round(measured_time[i] / ATTEMPTS, 4)
     cursor.close()
     connection.close()
-    return results
+    return measured_time

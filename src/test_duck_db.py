@@ -15,16 +15,17 @@ queries = [
 COUNT_QUERY = 4
 
 def test():
-    results = [0] * COUNT_QUERY
-    connection = duckdb.connect(f"{folder_data}\\{name_db}")
+    duckdb.install_extension("sqlite")  # !!!
+    measured_time = [0] * COUNT_QUERY
+    connection = duckdb.connect(f"{folder_data}\\db.db")
     cursor = connection.cursor()
     for i in range(COUNT_QUERY):
         for _ in range(ATTEMPTS):
             start = perf_counter()
             cursor.execute(queries[i])
             finish = perf_counter()
-            results[i] += finish - start
-        results[i] = round(results[i] / ATTEMPTS, 3)
+            measured_time[i] += finish - start
+        measured_time[i] = round(measured_time[i] / ATTEMPTS, 4)
     cursor.close()
     connection.close()
-    return results
+    return measured_time
