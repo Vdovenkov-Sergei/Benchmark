@@ -271,19 +271,19 @@ Func.run_queries(tests)
 
 * Результаты работы на файле размером ~200МБ (`nyc_yellow_tiny.csv`):
 
-![](Results/images/launch_tiny.png)
+![](Results/images/launch_T.png)
 
 * Сравнение времени работы (в секундах) на разных модулях в виде графика: 
 
-![](Results/images/graphic_tiny.png)
+![](Results/images/graphic_T.png)
 
 * Результаты работы на файле размером ~2ГБ (`nyc_yellow_big.csv`):
 
-![](Results/images/launch_big.png)
+![](Results/images/launch_B.png)
 
 * Сравнение времени работы (в секундах) на разных модулях в виде графика: 
 
-![](Results/images/graphic_big.png)
+![](Results/images/graphic_B.png)
 
 ### 5.4 Комментарии к библиотекам
 
