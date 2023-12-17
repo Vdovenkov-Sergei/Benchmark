@@ -18,7 +18,7 @@ def print_inf(where, is_already) -> None:
 
 def read_csv_file() -> pd.DataFrame:
     D_frame = pd.read_csv(f"{folder_data}\\{dataset}")
-    D_frame = D_frame.drop(columns=["Airport_fee", "Unnamed: 21"])
+    D_frame = D_frame.drop(columns=["Airport_fee"])
     D_frame["tpep_pickup_datetime"] = pd.to_datetime(D_frame["tpep_pickup_datetime"])
     D_frame["tpep_dropoff_datetime"] = pd.to_datetime(D_frame["tpep_dropoff_datetime"])
     D_frame = D_frame.rename(columns={"Unnamed: 0" : "ID"})
