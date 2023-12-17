@@ -10,6 +10,7 @@
 *.csv
 !results.csv
 *.txt
+!requirements.txt
 
 # byte-compiled files
 __pycache__/
